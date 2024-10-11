@@ -1,9 +1,5 @@
 function init()
-    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 16)
-    SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 16)
-
-    @assert SDL_Init(SDL_INIT_VIDEO) == 0 "error initializing SDL: $(unsafe_string(SDL_GetError()))"
-    @assert IMG_Init(IMG_INIT_PNG) != 0 "error initializing IMG: $(unsafe_string(SDL_GetError()))"
+    SimpleDirectMediaLayer.init()
 end
 
 function create_window(title::String, width::Int, height::Int)

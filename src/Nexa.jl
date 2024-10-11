@@ -7,10 +7,11 @@ include("colors.jl")
 include("input.jl")
 include("context.jl")
 include("rendering.jl")
-include("texture.jl")
+include("load.jl")
 include("window.jl")
+include("audio.jl")
 
-function start(update::Function, render::Function, title::String = "Nexa Project", width::Int = 800, height::Int = 800, resizable::Bool = false)
+function start(on_start::Function, update::Function, render::Function, title::String = "Nexa Project", width::Int = 800, height::Int = 800, resizable::Bool = false)
     init()
     window = create_window(title, width, height)
     renderer = create_renderer(window)
@@ -21,13 +22,13 @@ function start(update::Function, render::Function, title::String = "Nexa Project
 
     ctx = Context(renderer)
 
-    dt = 1 / 60
+    on_start()
 
     running = true
     while running
         running = process_events()
 
-        update(dt)
+        update()
 
         render(ctx)
 
@@ -38,6 +39,11 @@ function start(update::Function, render::Function, title::String = "Nexa Project
 
     SDL_DestroyWindow(window)
     SDL_DestroyRenderer(ctx.renderer)
+    Mix_HaltMusic()
+    Mix_HaltChannel(Int32(-1))
+    Mix_CloseAudio()
+    TTF_Quit()
+    Mix_Quit()
     SDL_Quit()
 end
 

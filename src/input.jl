@@ -29,10 +29,25 @@ const key_map = Dict(
     "escape" => SDL_SCANCODE_ESCAPE
 )
 
+previous_key_states = Dict{String, Int}()
+
 function is_key_down(key::String)
     scancode = key_map[key]
     key_state = SDL_GetKeyboardState(C_NULL)
     return unsafe_load(key_state, scancode + 1) == 1
+end
+
+function is_key_pressed(key::String)
+    scancode = key_map[key]
+    key_state = SDL_GetKeyboardState(C_NULL)
+
+    current_state = unsafe_load(key_state, scancode + 1)
+
+    previous_state = get(previous_key_states, key, 0)
+
+    previous_key_states[key] = current_state
+
+    return current_state == 1 && previous_state == 0
 end
 
 function process_events()
