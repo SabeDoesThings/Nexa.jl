@@ -4,7 +4,7 @@
 I am currently creating a simple game library for the Julia programing language. It is called Nexa and at the moment I have simple key presses, image loading, and a simple game loop. It is not much right now but I only started working on it 2 days ago. 
 
 ## My goal:
-My goal for this project is to make a simple library to make game easily in Julia. Something like raylib, its not too bloated but still very easy to use. 
+My goal for this project is to make a simple library to easily make games in Julia. Something like raylib, its not too bloated, very easy to use, very powerful, and can make just about anything.
 
 ## Why am I making this? 
 Well one the julia game dev ecosystem is super scarce and there are only a couple libraries that are actually good. 
