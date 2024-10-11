@@ -1,4 +1,4 @@
-![NexaLogo](https://github.com/user-attachments/assets/5c25fc36-cf30-48c6-8d43-7ee5c5f80ee9)
+# N![NexaLogo](https://github.com/user-attachments/assets/71a0a6e6-d7de-4ff7-9505-4b8dd5d7ce3b)
 
-# Nexa.jl
+exa.jl
 A simple upcoming game library for the Julia programing language
