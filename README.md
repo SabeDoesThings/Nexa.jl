@@ -7,7 +7,7 @@ I am currently creating a simple game library for the Julia programing language.
 My goal for this project is to make a simple library to easily make games in Julia. Something like raylib, not too bloated, very easy to use, very powerful, and can make just about anything.
 
 ## Why am I making this? 
-Well one the julia game dev ecosystem is super scarce and there are only a couple libraries that are actually good. 
+Well the julia game dev ecosystem is super scarce and there are only a few libraries that are actually good. 
 ### [GameZero](https://github.com/aviks/GameZero.jl):
 It's simple but you can only use one file and doesn't really seem to be good for large scale projects. 
 ### [JulGame](https://github.com/Kyjor/JulGame.jl):
