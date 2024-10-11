@@ -8,9 +8,9 @@ My goal for this project is to make a simple library to make game easily in Juli
 
 ## Why am I making this? 
 Well one the julia game dev ecosystem is super scarce and there are only a couple libraries that are actually good. 
-### GameZero:
+### [GameZero](https://github.com/aviks/GameZero.jl):
 It's simple but you can only use one file and doesn't really seem to be good for large scale projects. 
-### JulGame:
+### [JulGame](https://github.com/Kyjor/JulGame.jl):
 Its pretty good so far. The main thing that loses me is the fact that it has a required editor. I am not a big fan of that because I want something more like a "game framework" instead of a "game engine" meaning I don't really want an editor like unity or something. 
-### Bplus:
+### [Bplus](https://github.com/heyx3/Bplus.jl):
 It is really well made but it is very low level and I want something that's easier for someone to get into.
