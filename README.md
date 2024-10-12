@@ -48,7 +48,7 @@ end
 
 Nexa.start(on_run, update, render, "Simple Window", 1280, 720, false)
 ```
-And with that just do `julia <file name>.jl` and you should see this
+And with that just do `julia <file name>.jl` and you should see this:
 ![image](https://github.com/user-attachments/assets/d898fda9-7231-473f-8661-b2d232a746be)
 
 Congratualtions!
