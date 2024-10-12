@@ -11,7 +11,7 @@ include("load.jl")
 include("window.jl")
 include("audio.jl")
 
-function start(on_start::Function, update::Function, render::Function, title::String = "Nexa Project", width::Int = 800, height::Int = 800, resizable::Bool = false)
+function start(on_run::Function, update::Function, render::Function, title::String = "Nexa Project", width::Int = 800, height::Int = 800, resizable::Bool = false)
     init()
     window = create_window(title, width, height)
     renderer = create_renderer(window)
