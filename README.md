@@ -53,4 +53,4 @@ And with that just do `julia <file name>.jl` and you should see this:
 
 Congratualtions!
 You just made your first window in Nexa.jl.
-If you want more example usage of Nexa.jl visit the [examples](https://github.com/SabeDoesThings/Nexa.jl/tree/main/examples) folder
+If you want more example usage of Nexa.jl visit the [examples](https://github.com/SabeDoesThings/Nexa.jl/tree/main/examples) folder.
