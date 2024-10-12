@@ -23,6 +23,7 @@ You should see this:
 
 If you don't see that. Check your PATH if you are on windows.
 Once you have that opened though type `]` and you should see this.
+
 ![image](https://github.com/user-attachments/assets/e3a09351-6421-4fc6-a77f-a8f7ad7c5797)
 
 This is the Julia package manager. 
