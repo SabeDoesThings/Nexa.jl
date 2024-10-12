@@ -1,7 +1,0 @@
-name = "Text"
-uuid = "0cc27bf2-51e5-4479-8c67-41a852fa3a5b"
-authors = ["Sup0088 <swirlface09@gmail.com>"]
-version = "0.1.0"
-
-[deps]
-Nexa = "762d48d5-c8ea-41cf-812d-d67cbd8ea08a"
