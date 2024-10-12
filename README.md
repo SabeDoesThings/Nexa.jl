@@ -33,7 +33,7 @@ Once you have that you need to activate your project.
 To do that you need to do `activate .` and you should somthing like this
 `(<project name>) pkg >` instead of the julia version.
 If you do have that just do the same command as before. `add https://github.com/SabeDoesThings/Nexa.jl` this will add Nexa.jl to your project.
-To get something to the screen just go into your file in the src folder and you can copy this code to open up a window.
+To open up a window just go into your file in the src folder and you can copy this code to open up a window.
 ```
 using Nexa
 
