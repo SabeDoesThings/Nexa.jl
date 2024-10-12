@@ -11,7 +11,7 @@ include("load.jl")
 include("window.jl")
 include("audio.jl")
 
-function start(on_run::Function, update::Function, render::Function, title::String = "Nexa Project", width::Int = 800, height::Int = 800, resizable::Bool = false)
+function start(on_start::Function, update::Function, render::Function, title::String = "Nexa Project", width::Int = 800, height::Int = 800, resizable::Bool = false)
     init()
     window = create_window(title, width, height)
     renderer = create_renderer(window)
@@ -25,10 +25,16 @@ function start(on_run::Function, update::Function, render::Function, title::Stri
     on_start()
 
     running = true
+    last_time = SDL_GetTicks()
+
     while running
         running = process_events()
 
-        update()
+        current_time = SDL_GetTicks()
+        dt = (current_time - last_time) / 1000.0
+        last_time = current_time
+
+        update(dt)
 
         render(ctx)
 
