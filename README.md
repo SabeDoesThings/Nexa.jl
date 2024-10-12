@@ -1,7 +1,7 @@
 # ![NexaLogo](https://github.com/user-attachments/assets/71a0a6e6-d7de-4ff7-9505-4b8dd5d7ce3b)
 
 # My game library: Nexa
-I am currently creating a simple game library for the Julia programing language. It is called Nexa and at the moment I have simple key presses, image loading, and a simple game loop. It is not much right now but I only started working on it 2 days ago. 
+A simple game library to make game development in the [Julia](https://julialang.org/) programming language easy. 
 
 ## My goal:
 My goal for this project is to make a simple library to easily make games in Julia. Something like raylib, not too bloated, very easy to use, very powerful, and can make just about anything.
