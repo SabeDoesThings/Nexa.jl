@@ -1,7 +1,0 @@
-name = "SimpleWindow"
-uuid = "538837ed-db1e-4cdd-9b17-bfff5a866e25"
-authors = ["Sup0088 <swirlface09@gmail.com>"]
-version = "0.1.0"
-
-[deps]
-Nexa = "762d48d5-c8ea-41cf-812d-d67cbd8ea08a"
