@@ -11,26 +11,27 @@ square = Square(Nexa.load_texture("./testing/NexaIcon.png"), 100, 100)
 
 my_font = Nexa.load_font("./testing/arial.ttf", 50)
 
-function on_start()
+function on_run()
     #Nexa.play_music_looped("./testing/music.wav")
 end
 
-function update()
+function update(dt::Float64)
     if Nexa.is_key_down("w")
-        square.y -= 4
+        square.y -= round(400 * dt)
     end
     if Nexa.is_key_down("a")
-        square.x -= 4
+        square.x -= round(400 * dt)
     end
     if Nexa.is_key_down("s")
-        square.y += 4
+        square.y += round(400 * dt)
     end
     if Nexa.is_key_down("d")
-        square.x += 4
+        square.x += round(400 * dt)
     end
 
     if Nexa.is_key_pressed("p")
         Nexa.play_audio("./testing/sfx.wav")
+        println("played sound")
     end
 end
 
@@ -48,4 +49,4 @@ function render(ctx::Nexa.Context)
     Nexa.render_text(ctx, my_font, "Hello Nexa!", Nexa.BLACK, 0, 0)
 end
 
-Nexa.start(on_start, update, render, "My Game", 1280, 720)
+Nexa.start(on_run, update, render, "My Game", 1280, 720)
