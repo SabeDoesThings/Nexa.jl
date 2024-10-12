@@ -26,7 +26,11 @@ const key_map = Dict(
     "y" => SDL_SCANCODE_Y,
     "z" => SDL_SCANCODE_Z,
     "space" => SDL_SCANCODE_SPACE,
-    "escape" => SDL_SCANCODE_ESCAPE
+    "escape" => SDL_SCANCODE_ESCAPE,
+    "up" => SDL_SCANCODE_UP,
+    "down" => SDL_SCANCODE_DOWN,
+    "left" => SDL_SCANCODE_LEFT,
+    "right" => SDL_SCANCODE_RIGHT
 )
 
 previous_key_states = Dict{String, Int}()
