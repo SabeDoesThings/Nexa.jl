@@ -22,7 +22,7 @@ You should see this:
 ![image](https://github.com/user-attachments/assets/3899e7e1-0f69-4a90-be5d-fd0bd2b36620)
 
 If you don't see that. Check your PATH if you are on windows.
-Once you have that opened though type `]` and you should see this.
+Once you have that opened though type `]` and you should see this:
 
 ![image](https://github.com/user-attachments/assets/e3a09351-6421-4fc6-a77f-a8f7ad7c5797)
 
