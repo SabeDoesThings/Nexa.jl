@@ -1,6 +1,0 @@
-name = "Nexa"
-uuid = "4cfde833-2980-401a-90d6-a136fa0e75aa"
-repo = "https://github.com/SabeDoesThings/Nexa.jl"
-description = "A simple game library to make game development in the Julia programming language easy."
-
-[packages]
