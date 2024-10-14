@@ -10,6 +10,7 @@ include("rendering.jl")
 include("load.jl")
 include("window.jl")
 include("audio.jl")
+include("animation.jl")
 
 function start(on_run::Function, update::Function, render::Function, title::String = "Nexa Project", width::Int = 800, height::Int = 800, resizable::Bool = false)
     init()
