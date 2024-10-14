@@ -2,7 +2,7 @@ using Nexa
 
 function on_run()
     Nexa.play_music_looped("./music.wav") # Currently on .wav files are supported
-    # Here we are actually using the on_run() function. This is because if we did this function in the update loop it will glitch
+    # Here we are actually using the on_run() function. This is because if we did this function in the update loop it will glitch and not play at all.
 end
 
 function update(dt::Float64)
