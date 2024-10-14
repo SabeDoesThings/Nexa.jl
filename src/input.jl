@@ -54,6 +54,36 @@ function is_key_pressed(key::String)
     return current_state == 1 && previous_state == 0
 end
 
+const mouse_button_map = Dict(
+    "left" => SDL_BUTTON_LEFT,
+    "middle" => SDL_BUTTON_MIDDLE,
+    "right" => SDL_BUTTON_RIGHT,
+    "x1" => SDL_BUTTON_X1,
+    "x2" => SDL_BUTTON_X2
+)
+
+previous_mouse_button_states = Dict{String, Int}()
+
+function is_mouse_button_down(button::String)
+    button_code = mouse_button_map[button]
+    mouse_state = SDL_GetMouseState(C_NULL, C_NULL)
+    return (mouse_state & SDL_BUTTON(button_code)) != 0
+end
+
+function is_mouse_button_pressed(button::String)
+    button_code = mouse_button_map[button]
+    mouse_state = SDL_GetMouseState(C_NULL, C_NULL)
+
+    current_state = (mouse_state & SDL_BUTTON(button_code)) != 0 ? 1 : 0
+
+    previous_state = get(previous_mouse_button_states, button, 0)
+
+    previous_mouse_button_states[button] = current_state
+
+    return current_state == 1 && previous_state == 0
+end
+
+
 function process_events()
     event = Ref{SDL_Event}()
     SDL_PollEvent(event)

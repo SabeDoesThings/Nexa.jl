@@ -11,8 +11,6 @@ function play_music_looped(music::String)
 
     if Mix_PlayMusic(music, -1) == -1
         error("Failed to play music: ", Mix_GetError())
-    else
-        println("Music is playing!")
     end
 end
 

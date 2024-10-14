@@ -120,6 +120,10 @@ function render_circle_filled(ctx::Nexa.Context, center_x::Int, center_y::Int, r
     end
 end
 
+function render_line(ctx::Context, x1::Int, x2::Int, y1::Int, y2::Int)
+    SDL_RenderDrawLine(ctx.renderer, x1, x2, y1, y2)
+end
+
 function clear_screen(ctx::Nexa.Context, color::Color)
     SDL_SetRenderDrawColor(ctx.renderer, color.r, color.g, color.b, color.a)
     SDL_RenderClear(ctx.renderer)
