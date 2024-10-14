@@ -57,7 +57,7 @@ Nexa.start(
     "Simple Window",  # The title of the window
     1280,             # The width of the window
     720,              # The height of the window
-    false             # wether or not the window is resiable or not
+    false             # whether or not the window is resiable or not
 )
 ```
 And with that just do `julia <file name>.jl` and you should see this:
