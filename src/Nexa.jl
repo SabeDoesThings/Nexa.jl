@@ -12,13 +12,23 @@ include("window.jl")
 include("audio.jl")
 include("animation.jl")
 
-function start(on_run::Function, update::Function, render::Function, title::String = "Nexa Project", width::Int = 800, height::Int = 800, resizable::Bool = false)
+const global_window_ref = Ref{Ptr{SDL_Window}}(Ptr{SDL_Window}(0))
+
+function start(
+    on_run::Function, 
+    update::Function, 
+    render::Function, 
+    title::String = "Nexa Project", 
+    width::Int = 800, 
+    height::Int = 800, 
+    resizable::Bool = false
+)
     init()
-    window = create_window(title, width, height)
-    renderer = create_renderer(window)
+    global_window_ref[] = create_window(title, width, height)
+    renderer = create_renderer(global_window_ref[])
 
     if resizable == true
-        SDL_SetWindowResizable(window, SDL_TRUE)
+        SDL_SetWindowResizable(global_window_ref[], SDL_TRUE)
     end
 
     ctx = Context(renderer)
@@ -44,7 +54,7 @@ function start(on_run::Function, update::Function, render::Function, title::Stri
         SDL_Delay(16)
     end
 
-    SDL_DestroyWindow(window)
+    SDL_DestroyWindow(global_window_ref[])
     SDL_DestroyRenderer(ctx.renderer)
     Mix_HaltMusic()
     Mix_HaltChannel(Int32(-1))
@@ -52,6 +62,20 @@ function start(on_run::Function, update::Function, render::Function, title::Stri
     TTF_Quit()
     Mix_Quit()
     SDL_Quit()
+end
+
+function get_window_width()
+    width = Ref{Cint}(0)
+    height = Ref{Cint}(0)
+    SDL_GetWindowSize(global_window_ref[], width, height)
+    return width[]
+end
+
+function get_window_height()
+    width = Ref{Cint}(0)
+    height = Ref{Cint}(0)
+    SDL_GetWindowSize(global_window_ref[], width, height)
+    return height[]
 end
 
 end # module Nexa

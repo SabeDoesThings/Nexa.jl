@@ -1,5 +1,5 @@
 function render_texture(ctx::Context, tex::Texture2D, tex_x::Int, tex_y::Int)
-    tex = SDL_CreateTextureFromSurface(ctx.renderer, tex)
+    tex = SDL_CreateTextureFromSurface(ctx.renderer, tex.surface)
 
     width = Ref{Cint}(0)
     height = Ref{Cint}(0)
@@ -11,6 +11,14 @@ function render_texture(ctx::Context, tex::Texture2D, tex_x::Int, tex_y::Int)
     dst = SDL_Rect(tex_x, tex_y, width[], height[])
 
     SDL_RenderCopy(ctx.renderer, tex, C_NULL, Ref(dst))
+end
+
+function set_texture_width(tex::Texture2D, new_width::Int)
+    tex.width = new_width
+end
+
+function set_texture_width(tex::Texture2D, new_height::Int)
+    tex.height = new_height
 end
 
 function convert_color(c::Color)

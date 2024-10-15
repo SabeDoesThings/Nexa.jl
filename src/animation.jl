@@ -22,7 +22,8 @@ function update_animation!(anim::Animation, delta_time::Float64)
     end
 end
 
-function render_animation(ctx::Nexa.Context, anim::Animation, dest_x::Int, dest_y::Int)
+function render_animation(ctx::Nexa.Context, anim::Animation, dest_x::Int, dest_y::Int, scale_x::Int = 1, scale_y::Int = 1)
+    # Create texture from the sprite sheet surface
     tex = SDL_CreateTextureFromSurface(ctx.renderer, anim.texture.surface)
 
     width = Ref{Cint}(0)
@@ -37,8 +38,12 @@ function render_animation(ctx::Nexa.Context, anim::Animation, dest_x::Int, dest_
     src_x = (anim.current_frame - 1) * anim.frame_width
     src_rect = SDL_Rect(src_x, 0, anim.frame_width, anim.frame_height)
 
-    # Create the destination rectangle for rendering
-    dst = SDL_Rect(dest_x, dest_y, anim.frame_width, anim.frame_height)
+    # Calculate the scaled dimensions
+    scaled_width = round(Int(anim.frame_width * scale_x))
+    scaled_height = round(Int(anim.frame_height * scale_y))
+
+    # Create the destination rectangle for rendering with scaled dimensions
+    dst = SDL_Rect(dest_x, dest_y, scaled_width, scaled_height)
 
     # Render the current frame of the animation
     SDL_RenderCopy(ctx.renderer, tex, Ref(src_rect), Ref(dst))
