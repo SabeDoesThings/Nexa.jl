@@ -14,7 +14,6 @@ function on_run()
     Nexa.play_music_looped("./music.wav")
 
     println("Window Size: ", Nexa.get_window_width(), ", ", Nexa.get_window_height())
-    println("Viewport Size: ", Nexa.get_viewport_width(), ", ", Nexa.get_viewport_height())
 end
 
 anim = Nexa.Animation(Nexa.load_texture("./character_spritesheet.png"), 48, 48, 4, 0.1)
@@ -64,4 +63,4 @@ function render(ctx::Nexa.Context)
     Nexa.render_text(ctx, my_font, "Hello Nexa!", Nexa.BLACK, 0, 0)
 end
 
-Nexa.start(on_run, update, render, "My Game", 1280, 720, false, Nexa.Viewport(100, 100, 600, 400))
+Nexa.start(on_run, update, render, "My Game", 1280, 720, false)
