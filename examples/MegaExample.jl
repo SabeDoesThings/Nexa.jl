@@ -1,4 +1,5 @@
-using Nexa
+include("../src/Nexa.jl")
+using .Nexa
 
 mutable struct Square
     tex::Nexa.Texture2D
@@ -6,17 +7,18 @@ mutable struct Square
     y::Int
 end
 
-square = Square(Nexa.load_texture("./NexaIcon.png"), 100, 100)
+square = Square(Nexa.load_texture("./testing/NexaIcon.png"), 100, 100)
 
-my_font = Nexa.load_font("./arial.ttf", 50)
+my_font = Nexa.load_font("./testing/arial.ttf", 50)
 
 function on_run()
-    Nexa.play_music_looped("./music.wav")
+    #Nexa.play_music_looped("./testing/music.wav")
 
     println("Window Size: ", Nexa.get_window_width(), ", ", Nexa.get_window_height())
 end
 
-anim = Nexa.Animation(Nexa.load_texture("./character_spritesheet.png"), 48, 48, 4, 0.1)
+anim_tex = Nexa.load_texture("./testing/character_spritesheet.png")
+anim = Nexa.Animation(anim_tex, 48, 48, 4, 0.1)
 
 function update(dt::Float64)
     if Nexa.is_key_down("w")
@@ -33,7 +35,7 @@ function update(dt::Float64)
     end
 
     if Nexa.is_key_pressed("p")
-        Nexa.play_audio("./sfx.wav")
+        Nexa.play_audio("./testing/sfx.wav")
         println("played sound")
     end
 
@@ -48,6 +50,8 @@ function update(dt::Float64)
 end
 
 function render(ctx::Nexa.Context)
+    Nexa.create_viewport(ctx, 640, 360)
+
     Nexa.clear_screen(ctx, Nexa.SKYBLUE)
 
     Nexa.render_animation(ctx, anim, 100, 100)
