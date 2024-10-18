@@ -45,8 +45,8 @@ end
 function update(dt::Float64)
 end
 
-# For Rendering things to the screen
-function render(ctx::Nexa.Context) # the ctx::Nexa.Context allows to actually access the low level renderer
+# For rendering things to the screen
+function render(ctx::Nexa.Context) # the ctx::Nexa.Context is needed for the library to use the low level rendering side of things
 end
 
 # The Nexa.start function takes in 7 arguments
