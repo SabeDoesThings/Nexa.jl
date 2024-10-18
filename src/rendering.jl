@@ -1,3 +1,5 @@
+default_font = load_font("./src/Pixled.ttf")
+
 function render_texture(ctx::Nexa.Context, tex::Texture2D, tex_x::Int, tex_y::Int)
     tex = SDL_CreateTextureFromSurface(ctx.renderer, tex.surface)
 
@@ -30,7 +32,7 @@ function convert_color(c::Color)
     return SDL_Color(c.r, c.g, c.b, c.a)
 end
 
-function render_text(ctx::Nexa.Context, font::Ptr{TTF_Font}, text::String, color::Color, x::Int, y::Int)
+function render_text(ctx::Nexa.Context, font::Ptr{TTF_Font} = default_font, text::String, color::Color, x::Int, y::Int)
     sdl_color = convert_color(color)
 
     surface = TTF_RenderText_Solid(font, text, sdl_color)
