@@ -19,3 +19,14 @@ function create_renderer(window)
 
     return renderer
 end
+
+function create_viewport(ctx::Nexa.Context, width::Int, height::Int)
+    window_width = Nexa.get_window_width()
+    window_height = Nexa.get_window_height()
+
+    scale_x = window_width / width
+    scale_y = window_height / height
+
+    ctx.scale_x = scale_x
+    ctx.scale_y = scale_y
+end
