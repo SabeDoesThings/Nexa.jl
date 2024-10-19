@@ -1,4 +1,4 @@
-![nexa](https://github.com/user-attachments/assets/1bb030fc-d2a1-41c0-98e0-ea497cca167a)
+![newnexa](https://github.com/user-attachments/assets/1646cf10-499b-4aee-b072-f5a6445efcd3)
 
 # My game library: Nexa
 A simple game library to make game development in the [Julia](https://julialang.org/) programming language easy. 
