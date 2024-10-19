@@ -1,4 +1,4 @@
-default_font = load_font("./src/Pixled.ttf")
+default_font = Nexa.load_font("./src/Pixeled.ttf", 15)
 
 function render_texture(ctx::Nexa.Context, tex::Texture2D, tex_x::Int, tex_y::Int)
     tex = SDL_CreateTextureFromSurface(ctx.renderer, tex.surface)

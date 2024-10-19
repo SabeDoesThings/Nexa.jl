@@ -3,11 +3,11 @@ module Nexa
 using SimpleDirectMediaLayer
 using SimpleDirectMediaLayer.LibSDL2
 
+include("load.jl")
 include("colors.jl")
 include("input.jl")
 include("context.jl")
 include("rendering.jl")
-include("load.jl")
 include("window.jl")
 include("audio.jl")
 include("animation.jl")
