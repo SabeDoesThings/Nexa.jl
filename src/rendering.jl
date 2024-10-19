@@ -22,7 +22,7 @@ function set_texture_width(tex::Texture2D, new_width::Int)
     tex.width = new_width
 end
 
-function set_texture_width(tex::Texture2D, new_height::Int)
+function set_texture_height(tex::Texture2D, new_height::Int)
     tex.height = new_height
 end
 
