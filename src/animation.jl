@@ -1,26 +1,38 @@
 mutable struct Animation
-    texture::Nexa.Texture2D
+    texture::Texture2D
     frame_width::Int
     frame_height::Int
     num_frames::Int
-    frame_duration::Float64  # Duration for each frame in seconds
+    frame_time::Float64
     current_frame::Int
     elapsed_time::Float64
+    start_frame::Int
+    end_frame::Int
 
-    function Animation(texture::Nexa.Texture2D, frame_width::Int, frame_height::Int, num_frames::Int, frame_duration::Float64)
-        new(texture, frame_width, frame_height, num_frames, frame_duration, 1, 0.0)
+    function Animation(texture::Texture2D, frame_width::Int, frame_height::Int, num_frames::Int, frame_time::Float64, start_frame::Int, end_frame::Int)
+        new(texture, frame_width, frame_height, num_frames, frame_time, start_frame, 0.0, start_frame, end_frame)
     end
 end
 
-function update_animation!(anim::Animation, delta_time::Float64)
-    anim.elapsed_time += delta_time
+function update_animation!(anim::Animation, dt::Float64, looped::Bool=true)
+    anim.elapsed_time += dt
 
-    # Check if it's time to advance to the next frame
-    if anim.elapsed_time >= anim.frame_duration
-        anim.current_frame = (anim.current_frame % anim.num_frames) + 1  # Looping frames
-        anim.elapsed_time -= anim.frame_duration  # Reset the elapsed time
+    if anim.elapsed_time >= anim.frame_time
+        anim.elapsed_time -= anim.frame_time
+        anim.current_frame += 1
+
+        if looped
+            if anim.current_frame > anim.end_frame
+                anim.current_frame = anim.start_frame
+            end
+        else
+            if anim.current_frame > anim.end_frame
+                anim.current_frame = anim.end_frame
+            end
+        end
     end
 end
+
 
 function render_animation(ctx::Nexa.Context, anim::Animation, dest_x::Int, dest_y::Int)
     tex = SDL_CreateTextureFromSurface(ctx.renderer, anim.texture.surface)
@@ -28,7 +40,6 @@ function render_animation(ctx::Nexa.Context, anim::Animation, dest_x::Int, dest_
     width = Ref{Cint}(0)
     height = Ref{Cint}(0)
 
-    # Query the texture to get its dimensions
     if SDL_QueryTexture(tex, C_NULL, C_NULL, width, height) != 0
         error("Failed to render texture! ERROR: $(unsafe_string(SDL_GetError()))")
     end

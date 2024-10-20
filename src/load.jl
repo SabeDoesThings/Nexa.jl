@@ -11,12 +11,10 @@ function load_texture(file_path::String)
 end
 
 function load_font(font_path::String, font_size::Int)
-    # Initialize the TTF library
     if TTF_Init() == -1
         error("Failed to initialize SDL_ttf: ", SDL_GetError)
     end
 
-    # Load the font
     font = TTF_OpenFont(font_path, font_size)
     
     if font == C_NULL
