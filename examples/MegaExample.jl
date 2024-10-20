@@ -1,5 +1,4 @@
-include("../src/Nexa.jl")
-using .Nexa
+using Nexa
 
 mutable struct Square
     tex::Nexa.Texture2D
@@ -18,7 +17,7 @@ function on_run()
 end
 
 anim_tex = Nexa.load_texture("./testing/character_spritesheet.png")
-anim = Nexa.Animation(anim_tex, 48, 48, 4, 0.1)
+anim = Nexa.Animation(anim_tex, 48, 48, 6, 0.1, 11, 15)
 
 function update(dt::Float64)
     if Nexa.is_key_down("w")
@@ -46,13 +45,18 @@ function update(dt::Float64)
         println("right mouse button down")
     end
 
-    Nexa.update_animation!(anim, dt)
+    Nexa.update_animation!(anim, dt, true)
+
+    x, y = Nexa.get_mouse_position()
+    println("x: $x", ", ", "y: $y")
 end
 
 function render(ctx::Nexa.Context)
     Nexa.create_viewport(ctx, 640, 360)
 
     Nexa.clear_screen(ctx, Nexa.SKYBLUE)
+
+    Nexa.render_texture(ctx, square.tex, square.x, square.y)
 
     Nexa.render_animation(ctx, anim, 100, 100)
 
@@ -61,8 +65,6 @@ function render(ctx::Nexa.Context)
 
     Nexa.render_circle_line(ctx, 320, 240, 100, Nexa.GREEN)
     Nexa.render_circle_filled(ctx, 320, 600, 100, Nexa.YELLOW)
-    
-    Nexa.render_texture(ctx, square.tex, square.x, square.y)
 
     Nexa.render_text(ctx, my_font, "Hello Nexa!", Nexa.BLACK, 0, 0)
 end
