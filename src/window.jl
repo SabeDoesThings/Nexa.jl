@@ -32,3 +32,12 @@ function create_viewport(ctx::Nexa.Context, width::Int, height::Int)
     ctx.scale_x = scale_x
     ctx.scale_y = scale_y
 end
+
+function get_mouse_position()
+    x_ref = Ref{Cint}(0)
+    y_ref = Ref{Cint}(0)
+
+    SDL_GetMouseState(x_ref, y_ref)
+
+    return (x_ref[], y_ref[])
+end

@@ -13,14 +13,14 @@ end
 function load_font(font_path::String, font_size::Int)
     # Initialize the TTF library
     if TTF_Init() == -1
-        error("Failed to initialize SDL_ttf: $(unsafe_string(SDL_GetError()))")
+        error("Failed to initialize SDL_ttf: ", SDL_GetError)
     end
 
     # Load the font
     font = TTF_OpenFont(font_path, font_size)
     
     if font == C_NULL
-        error("Failed to load font: $(unsafe_string(SDL_GetError()))")
+        error("Failed to load font: ", SDL_GetError())
     end
 
     return font

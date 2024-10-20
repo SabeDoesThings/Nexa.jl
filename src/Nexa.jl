@@ -11,6 +11,7 @@ include("rendering.jl")
 include("window.jl")
 include("audio.jl")
 include("animation.jl")
+include("collision.jl")
 
 const global_window_ref = Ref{Ptr{SDL_Window}}(Ptr{SDL_Window}(0))
 
