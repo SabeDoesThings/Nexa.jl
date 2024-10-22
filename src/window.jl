@@ -1,7 +1,7 @@
 function init()
     SimpleDirectMediaLayer.init()
 
-    println("This is v0.0.1")
+    println("This is v0.1.0")
 end
 
 function create_window(title::String, width::Int, height::Int)
