@@ -1,18 +1,13 @@
-function load_texture(ctx::Nexa.Context, filepath::String)
-    surface = SDL_LoadBMP(filepath)
+function load_texture(file_path::String)
+    width_ref = 0
+    height_ref = 0
+
+    surface = IMG_Load(file_path)
     if surface == C_NULL
         error("Failed to load texture! ERROR: $(unsafe_string(SDL_GetError()))")
     end
-    
-    texture = SDL_CreateTextureFromSurface(ctx.renderer, surface)
-    if texture == C_NULL
-        error("Failed to create texture! ERROR: $(unsafe_string(SDL_GetError()))")
-    end
-    
-    width = SDL_Surface.w[Ptr{Int32}(surface)]
-    height = SDL_Surface.h[Ptr{Int32}(surface)]
 
-    return Texture2D(surface, texture, width, height)
+    return Texture2D(surface, width_ref, height_ref)
 end
 
 function load_font(font_path::String, font_size::Int)

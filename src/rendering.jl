@@ -1,12 +1,21 @@
-function render_texture(ctx::Nexa.Context, tex::Texture2D, tex_x::Int, tex_y::Int)
-    scaled_tex_x = Int(tex_x * ctx.scale_x)
-    scaled_tex_y = Int(tex_y * ctx.scale_y)
-    scaled_width = Int(tex.width * ctx.scale_x)
-    scaled_height = Int(tex.height * ctx.scale_y)
+function render_texture(ctx::Nexa.Context, tex::Texture2D, tex_x::Int, tex_y::Int, scale_x::Float64 = 1.0, scale_y::Float64 = 1.0)
+    tex = SDL_CreateTextureFromSurface(ctx.renderer, tex.surface)
+
+    width = Ref{Cint}(0)
+    height = Ref{Cint}(0)
+
+    if SDL_QueryTexture(tex, C_NULL, C_NULL, width, height) != 0
+        error("Failed to render texture! ERROR: $(unsafe_string(SDL_GetError()))")
+    end
+
+    scaled_tex_x = Int(tex_x * scale_x)
+    scaled_tex_y = Int(tex_y * scale_y)
+    scaled_width = Int(width[] * scale_x)
+    scaled_height = Int(height[] * scale_y)
 
     dst = SDL_Rect(scaled_tex_x, scaled_tex_y, scaled_width, scaled_height)
 
-    SDL_RenderCopy(ctx.renderer, tex.texture, C_NULL, Ref(dst))
+    SDL_RenderCopy(ctx.renderer, tex, C_NULL, Ref(dst))
 end
 
 
@@ -22,7 +31,7 @@ function convert_color(c::Color)
     return SDL_Color(c.r, c.g, c.b, c.a)
 end
 
-function render_text(ctx::Nexa.Context, font::Ptr{TTF_Font}, text::String, color::Color, x::Int, y::Int)
+function render_text(ctx::Nexa.Context, font::Ptr{TTF_Font}, text::String, color::Color, x::Int, y::Int, scale_x::Float64 = 1.0, scale_y::Float64 = 1.0)
     sdl_color = convert_color(color)
 
     surface = TTF_RenderText_Solid(font, text, sdl_color)
@@ -39,10 +48,10 @@ function render_text(ctx::Nexa.Context, font::Ptr{TTF_Font}, text::String, color
     w, h = Ref{Cint}(0), Ref{Cint}(0)
     SDL_QueryTexture(texture, C_NULL, C_NULL, w, h)
 
-    scaled_x = Int(x * ctx.scale_x)
-    scaled_y = Int(y * ctx.scale_y)
-    scaled_width = round(Int(w[] * ctx.scale_x))
-    scaled_height = round(Int(h[] * ctx.scale_y))
+    scaled_x = Int(x * scale_x)
+    scaled_y = Int(y * scale_y)
+    scaled_width = round(Int(w[] * scale_x))
+    scaled_height = round(Int(h[] * scale_y))
 
     dest_rect = SDL_Rect(scaled_x, scaled_y, scaled_width, scaled_height)
 
@@ -51,7 +60,6 @@ function render_text(ctx::Nexa.Context, font::Ptr{TTF_Font}, text::String, color
     SDL_DestroyTexture(texture)
     SDL_FreeSurface(surface)
 end
-
 
 function render_rect_filled(ctx::Nexa.Context, x::Int, y::Int, width::Int, height::Int, color::Nexa.Color)
     scaled_x = Int(x * ctx.scale_x)

@@ -10,7 +10,6 @@ end
 
 mutable struct Texture2D
     surface::Ptr{SDL_Surface}
-    texture::Ptr{SDL_Texture}
     width::Int
     height::Int
 end

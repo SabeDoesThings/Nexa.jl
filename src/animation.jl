@@ -14,6 +14,7 @@ mutable struct Animation
     end
 end
 
+
 function update_animation!(anim::Animation, dt::Float64, looped::Bool=true)
     anim.elapsed_time += dt
 
@@ -33,8 +34,7 @@ function update_animation!(anim::Animation, dt::Float64, looped::Bool=true)
     end
 end
 
-
-function render_animation(ctx::Nexa.Context, anim::Animation, dest_x::Int, dest_y::Int)
+function render_animation(ctx::Nexa.Context, anim::Animation, dest_x::Int, dest_y::Int, scale_x::Float64 = 1.0, scale_y::Float64 = 1.0)
     tex = SDL_CreateTextureFromSurface(ctx.renderer, anim.texture.surface)
 
     width = Ref{Cint}(0)
@@ -47,10 +47,10 @@ function render_animation(ctx::Nexa.Context, anim::Animation, dest_x::Int, dest_
     src_x = (anim.current_frame - 1) * anim.frame_width
     src_rect = SDL_Rect(src_x, 0, anim.frame_width, anim.frame_height)
 
-    scaled_width = round(Int(anim.frame_width * ctx.scale_x))
-    scaled_height = round(Int(anim.frame_height * ctx.scale_y))
+    scaled_width = round(Int(anim.frame_width * scale_x))
+    scaled_height = round(Int(anim.frame_height * scale_y))
 
-    dst = SDL_Rect(Int(dest_x * ctx.scale_x), Int(dest_y * ctx.scale_y), scaled_width, scaled_height)
+    dst = SDL_Rect(Int(dest_x * scale_x), Int(dest_y * scale_y), scaled_width, scaled_height)
 
     SDL_RenderCopy(ctx.renderer, tex, Ref(src_rect), Ref(dst))
 
