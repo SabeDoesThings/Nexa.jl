@@ -8,16 +8,13 @@ function render_texture(ctx::Nexa.Context, tex::Texture2D, tex_x::Int, tex_y::In
         error("Failed to render texture! ERROR: $(unsafe_string(SDL_GetError()))")
     end
 
-    scaled_tex_x = Int(tex_x * scale_x)
-    scaled_tex_y = Int(tex_y * scale_y)
     scaled_width = Int(width[] * scale_x)
     scaled_height = Int(height[] * scale_y)
 
-    dst = SDL_Rect(scaled_tex_x, scaled_tex_y, scaled_width, scaled_height)
+    dst = SDL_Rect(tex_x, tex_y, scaled_width, scaled_height)
 
     SDL_RenderCopy(ctx.renderer, tex, C_NULL, Ref(dst))
 end
-
 
 function set_texture_width(tex::Texture2D, new_width::Int)
     tex.width = new_width
