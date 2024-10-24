@@ -1,6 +1,6 @@
 using Nexa
 
-my_anim = Nexa.Animation(Nexa.load_texture("./src/character_spritesheet.png"), 48, 48, 4, 0.1)
+my_anim = Nexa.Animation(Nexa.load_texture("./src/character_spritesheet.png"), 48, 48, 4, 0.1, 1, 4)
 
 function on_run()
 end
