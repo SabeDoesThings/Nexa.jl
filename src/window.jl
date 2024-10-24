@@ -1,7 +1,7 @@
 function init()
     SimpleDirectMediaLayer.init()
 
-    println("This is v0.0.1")
+    println("This is v0.1")
 end
 
 function create_window(title::String, width::Int, height::Int)
@@ -20,17 +20,6 @@ function create_renderer(window)
     end
 
     return renderer
-end
-
-function create_viewport(ctx::Nexa.Context, width::Int, height::Int)
-    window_width = Nexa.get_window_width()
-    window_height = Nexa.get_window_height()
-
-    scale_x = window_width / width
-    scale_y = window_height / height
-
-    ctx.scale_x = scale_x
-    ctx.scale_y = scale_y
 end
 
 function get_mouse_position()

@@ -65,18 +65,4 @@ function start(
     SDL_Quit()
 end
 
-function get_window_width()
-    width = Ref{Cint}(0)
-    height = Ref{Cint}(0)
-    SDL_GetWindowSize(global_window_ref[], width, height)
-    return width[]
-end
-
-function get_window_height()
-    width = Ref{Cint}(0)
-    height = Ref{Cint}(0)
-    SDL_GetWindowSize(global_window_ref[], width, height)
-    return height[]
-end
-
 end # module Nexa

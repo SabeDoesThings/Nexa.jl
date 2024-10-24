@@ -1,10 +1,8 @@
 mutable struct Context
     renderer::Ptr{SDL_Renderer}
-    scale_x::Float64
-    scale_y::Float64
 
     function Context(renderer::Ptr{SDL_Renderer})
-        return new(renderer, 1.0, 1.0)
+        return new(renderer)
     end
 end
 

@@ -61,81 +61,22 @@ function render_text(ctx::Nexa.Context, font::Ptr{TTF_Font}, text::String, color
     SDL_FreeSurface(surface)
 end
 
-function render_rect_filled(ctx::Nexa.Context, x::Int, y::Int, width::Int, height::Int, color::Nexa.Color)
-    scaled_x = Int(x * ctx.scale_x)
-    scaled_y = Int(y * ctx.scale_y)
-    scaled_width = Int(width * ctx.scale_x)
-    scaled_height = Int(height * ctx.scale_y)
-
+function render_rect_filled(ctx::Nexa.Context, x::Int, y::Int, width::Int, height::Int, color::Color)
     SDL_SetRenderDrawColor(ctx.renderer, color.r, color.g, color.b, color.a)
-    rect = SDL_Rect(scaled_x, scaled_y, scaled_width, scaled_height)
+    rect = SDL_Rect(x, y, width, height)
     SDL_RenderFillRect(ctx.renderer, Ref(rect))
 end
 
-
 function render_rect_line(ctx::Nexa.Context, x::Int, y::Int, width::Int, height::Int, color::Color)
-    scaled_x = Int(x * ctx.scale_x)
-    scaled_y = Int(y * ctx.scale_y)
-    scaled_width = Int(width * ctx.scale_x)
-    scaled_height = Int(height * ctx.scale_y)
-
     SDL_SetRenderDrawColor(ctx.renderer, color.r, color.g, color.b, color.a)
-    rect = SDL_Rect(scaled_x, scaled_y, scaled_width, scaled_height)
+    rect = SDL_Rect(x, y, width, height)
     SDL_RenderDrawRect(ctx.renderer, Ref(rect))
 end
 
-
 function render_circle_line(ctx::Nexa.Context, center_x::Int, center_y::Int, radius::Int, color::Color)
-    scaled_center_x = Int(center_x * ctx.scale_x)
-    scaled_center_y = Int(center_y * ctx.scale_y)
-    scaled_radius_x = Int(radius * ctx.scale_x)
-    scaled_radius_y = Int(radius * ctx.scale_y)
+    diameter = radius * 2
 
-    diameter_x = scaled_radius_x * 2
-    diameter_y = scaled_radius_y * 2
-
-    x = scaled_radius_x - 1
-    y = 0
-    tx = 1
-    ty = 1
-    error_x = tx - diameter_x
-    error_y = ty - diameter_y
-
-    while x >= y
-        SDL_SetRenderDrawColor(ctx.renderer, color.r, color.g, color.b, color.a)
-
-        SDL_RenderDrawPoint(ctx.renderer, scaled_center_x + x, scaled_center_y - y)
-        SDL_RenderDrawPoint(ctx.renderer, scaled_center_x + x, scaled_center_y + y)
-        SDL_RenderDrawPoint(ctx.renderer, scaled_center_x - x, scaled_center_y - y)
-        SDL_RenderDrawPoint(ctx.renderer, scaled_center_x - x, scaled_center_y + y)
-        SDL_RenderDrawPoint(ctx.renderer, scaled_center_x + y, scaled_center_y - x)
-        SDL_RenderDrawPoint(ctx.renderer, scaled_center_x + y, scaled_center_y + x)
-        SDL_RenderDrawPoint(ctx.renderer, scaled_center_x - y, scaled_center_y - x)
-        SDL_RenderDrawPoint(ctx.renderer, scaled_center_x - y, scaled_center_y + x)
-
-        if error_x <= 0
-            y += 1
-            error_x += ty
-            ty += 2
-        end
-
-        if error_x > 0
-            x -= 1
-            tx += 2
-            error_x += tx - diameter_x
-        end
-    end
-end
-
-
-function render_circle_filled(ctx::Nexa.Context, center_x::Int, center_y::Int, radius::Int, color::Nexa.Color)
-    scaled_center_x = Int(center_x * ctx.scale_x)
-    scaled_center_y = Int(center_y * ctx.scale_y)
-    scaled_radius = Int(radius * ctx.scale_x)
-
-    diameter = scaled_radius * 2
-
-    x = scaled_radius - 1
+    x = radius - 1
     y = 0
     tx = 1
     ty = 1
@@ -144,10 +85,14 @@ function render_circle_filled(ctx::Nexa.Context, center_x::Int, center_y::Int, r
     while x >= y
         SDL_SetRenderDrawColor(ctx.renderer, color.r, color.g, color.b, color.a)
 
-        SDL_RenderDrawLine(ctx.renderer, scaled_center_x - x, scaled_center_y - y, scaled_center_x + x, scaled_center_y - y)
-        SDL_RenderDrawLine(ctx.renderer, scaled_center_x - x, scaled_center_y + y, scaled_center_x + x, scaled_center_y + y)
-        SDL_RenderDrawLine(ctx.renderer, scaled_center_x - y, scaled_center_y - x, scaled_center_x + y, scaled_center_y - x)
-        SDL_RenderDrawLine(ctx.renderer, scaled_center_x - y, scaled_center_y + x, scaled_center_x + y, scaled_center_y + x)
+        SDL_RenderDrawPoint(ctx.renderer, center_x + x, center_y - y)
+        SDL_RenderDrawPoint(ctx.renderer, center_x + x, center_y + y)
+        SDL_RenderDrawPoint(ctx.renderer, center_x - x, center_y - y)
+        SDL_RenderDrawPoint(ctx.renderer, center_x - x, center_y + y)
+        SDL_RenderDrawPoint(ctx.renderer, center_x + y, center_y - x)
+        SDL_RenderDrawPoint(ctx.renderer, center_x + y, center_y + x)
+        SDL_RenderDrawPoint(ctx.renderer, center_x - y, center_y - x)
+        SDL_RenderDrawPoint(ctx.renderer, center_x - y, center_y + x)
 
         if error <= 0
             y += 1
@@ -163,6 +108,36 @@ function render_circle_filled(ctx::Nexa.Context, center_x::Int, center_y::Int, r
     end
 end
 
+function render_circle_filled(ctx::Nexa.Context, center_x::Int, center_y::Int, radius::Int, color::Color)
+    diameter = radius * 2
+
+    x = radius - 1
+    y = 0
+    tx = 1
+    ty = 1
+    error = tx - diameter
+
+    while x >= y
+        SDL_SetRenderDrawColor(ctx.renderer, color.r, color.g, color.b, color.a)
+
+        SDL_RenderDrawLine(ctx.renderer, center_x - x, center_y - y, center_x + x, center_y - y)
+        SDL_RenderDrawLine(ctx.renderer, center_x - x, center_y + y, center_x + x, center_y + y)
+        SDL_RenderDrawLine(ctx.renderer, center_x - y, center_y - x, center_x + y, center_y - x)
+        SDL_RenderDrawLine(ctx.renderer, center_x - y, center_y + x, center_x + y, center_y + x)
+
+        if error <= 0
+            y += 1
+            error += ty
+            ty += 2
+        end
+
+        if error > 0
+            x -= 1
+            tx += 2
+            error += tx - diameter
+        end
+    end
+end
 
 function render_line(ctx::Nexa.Context, x1::Int, y1::Int, x2::Int, y2::Int)
     scaled_x1 = Int(x1 * ctx.scale_x)

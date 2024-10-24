@@ -50,7 +50,7 @@ function render_animation(ctx::Nexa.Context, anim::Animation, dest_x::Int, dest_
     scaled_width = round(Int(anim.frame_width * scale_x))
     scaled_height = round(Int(anim.frame_height * scale_y))
 
-    dst = SDL_Rect(Int(dest_x * scale_x), Int(dest_y * scale_y), scaled_width, scaled_height)
+    dst = SDL_Rect(Int(dest_x), Int(dest_y), scaled_width, scaled_height)
 
     SDL_RenderCopy(ctx.renderer, tex, Ref(src_rect), Ref(dst))
 
