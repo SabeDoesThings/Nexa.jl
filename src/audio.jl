@@ -18,3 +18,11 @@ function play_audio_looped(sound::String)
     sound = Mix_LoadWAV(sound)
     Mix_PlayChannel(-1, sound, -1)
 end
+
+function stop_music()
+    Mix_HaltMusic()
+end
+
+function stop_audio()
+    Mix_HaltChannel(-1)
+end
