@@ -1,3 +1,5 @@
+# DISCLAIMER! This library is no longer being worked on. If you want fork it and keep working on it you can.
+
 ![newnexa](https://github.com/user-attachments/assets/1fa6df7d-37df-45cb-9bd8-e545ff6d96d4)
 
 # My game library: Nexa
